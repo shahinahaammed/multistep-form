@@ -1,18 +1,48 @@
-import FormWrapper from "./FormWrapper"
+import FormWrapper from "./FormWrapper";
 
-const AddressForm = () => {
+type AddressData = {
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+};
+
+type AddressFormProps = AddressData & {
+  updateFields: (fields: Partial<AddressData>) => void;
+};
+
+const AddressForm = ({
+  street,
+  city,
+  state,
+  zip,
+  updateFields,
+}: AddressFormProps) => {
   return (
     <FormWrapper title="Address">
-     <label>Street</label>
-     <input autoFocus required type="text" />
-     <label>City</label>
-     <input required type="text" />
-     <label>State</label>
-     <input required type="text" />
-     <label>Zip</label>
-     <input required type="text" />
+      <label>Street</label>
+      <input
+        autoFocus
+        required
+        type="text"
+        value={street}
+        onClick={(e) => updateFields({ street: e.target.value })}
+      />
+      <label>City</label>
+      <input
+        required
+        type="text"
+        value={city}
+        onClick={(e) => updateFields({ city: e.target.value })}
+      />
+      <label>State</label>
+      <input required type="text" value={state}
+        onClick={(e) => updateFields({ state: e.target.value })} />
+      <label>Zip</label>
+      <input required type="text" value={zip}
+        onClick={(e) => updateFields({ zip: e.target.value })} />
     </FormWrapper>
-  )
-}
+  );
+};
 
-export default AddressForm
+export default AddressForm;
